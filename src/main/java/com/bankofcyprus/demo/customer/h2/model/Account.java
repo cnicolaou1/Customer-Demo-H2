@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -34,28 +33,24 @@ public class Account {
     @Id
     private String id= UUID.randomUUID().toString();
     @Version
+    @NotNull
     private Long version;
     
     @NotNull
-    @Column(nullable = false)
     private String accountNumber;
     
     @NotNull
-    @Column(nullable = false)
     private String accountType;
     
     @NotNull
-    @Column(nullable = false)
     @Builder.Default
     private BigDecimal availableBalance=BigDecimal.ZERO;
     
     @NotNull
-    @Column(nullable = false)
     @Builder.Default
     private BigDecimal currentBalance=BigDecimal.ZERO;
     
     @NotNull
-    @Column(nullable = false)
     private LocalDate openingDate;
 
     @OneToMany(cascade={CascadeType.MERGE, CascadeType.DETACH})

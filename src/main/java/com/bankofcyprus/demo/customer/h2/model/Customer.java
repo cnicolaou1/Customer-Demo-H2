@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -39,25 +38,22 @@ public class Customer {
     @Id
     private String id= UUID.randomUUID().toString();
     @Version
+    @NotNull
     private Long version;
 
     @NotNull
-    @Column(nullable = false)
     private String userId;
 
     @NotNull
-    @Column(nullable = false)
 	private String firstName;
 
     private String middleName;
 
     @NotNull
-    @Column(nullable = false)
     private String lastName;
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    @Column(nullable = false)
     private Sex sex;
 
     private String email;
@@ -65,15 +61,12 @@ public class Customer {
     private String mobileNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Segmentation segmentation;
 
     @NotNull
-    @Column(nullable = false)
     private String idNumber;
 
     @NotNull
-    @Column(nullable = false)
     private LocalDate birthDate;
 
     @ManyToOne(optional = false)

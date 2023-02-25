@@ -23,13 +23,12 @@ public class Country {
     @Id
     private String id= UUID.randomUUID().toString();
     @Version
+    @NotNull
     private Long version;
     
     @NotNull
-    @Column(nullable = false)
     private String code;
 
     @NotNull
-    @Column(nullable = false)
     private String name;
 }
