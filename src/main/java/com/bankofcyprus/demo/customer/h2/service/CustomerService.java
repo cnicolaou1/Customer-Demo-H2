@@ -13,6 +13,8 @@ import com.bankofcyprus.demo.customer.h2.repository.AccountRepository;
 import com.bankofcyprus.demo.customer.h2.repository.CountryRepository;
 import com.bankofcyprus.demo.customer.h2.repository.CustomerAccountRepository;
 import com.bankofcyprus.demo.customer.h2.repository.CustomerRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,25 +23,28 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class CustomerService {
-    
-	@Autowired
-	String authCode;
-	
-	@Autowired
-	boolean authorizationCodeRequired;
-	
-    @Autowired
-    CustomerRepository customerRepository;
-    
-    @Autowired
-    AccountRepository accountRepository;
-    
-    @Autowired
-    CountryRepository countryRepository;
+	private String authCode;
 
-    @Autowired
-    CustomerAccountRepository customerAccountRepository;
+    private boolean authorizationCodeRequired;
+
+    private CustomerRepository customerRepository;
+
+    private AccountRepository accountRepository;
+
+    private CountryRepository countryRepository;
+
+    private CustomerAccountRepository customerAccountRepository;
+
+//    public CustomerService(String authCode, boolean authorizationCodeRequired, CustomerRepository customerRepository, AccountRepository accountRepository, CountryRepository countryRepository, CustomerAccountRepository customerAccountRepository) {
+//        this.authCode = authCode;
+//        this.authorizationCodeRequired = authorizationCodeRequired;
+//        this.customerRepository = customerRepository;
+//        this.accountRepository = accountRepository;
+//        this.countryRepository = countryRepository;
+//        this.customerAccountRepository = customerAccountRepository;
+//    }
 
     public CustomerDto findCustomer(String userId){
         Customer customer = customerRepository.findByUserId(userId);

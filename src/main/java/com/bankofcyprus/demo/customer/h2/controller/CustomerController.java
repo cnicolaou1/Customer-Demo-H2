@@ -5,6 +5,7 @@ import com.bankofcyprus.demo.customer.h2.api.dto.CreateCustomerRequest;
 import com.bankofcyprus.demo.customer.h2.api.dto.CustomerDto;
 import com.bankofcyprus.demo.customer.h2.api.dto.UpdateCustomerRequest;
 import com.bankofcyprus.demo.customer.h2.service.CustomerService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/customers")
+@AllArgsConstructor
 public class CustomerController
 {
-    @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
     @GetMapping("/{userId}")
     public ResponseEntity<CustomerDto> getCustomer(@PathVariable String userId){

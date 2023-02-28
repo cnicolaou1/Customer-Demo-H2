@@ -1,29 +1,28 @@
 package com.bankofcyprus.demo.customer.h2.service;
 
-import static org.mockito.Mockito.when;
+import com.bankofcyprus.demo.customer.h2.api.dto.AccountDto;
+import com.bankofcyprus.demo.customer.h2.model.Account;
+import com.bankofcyprus.demo.customer.h2.repository.AccountRepository;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import static org.mockito.Mockito.when;
 
-import com.bankofcyprus.demo.customer.h2.api.dto.AccountDto;
-import com.bankofcyprus.demo.customer.h2.model.Account;
-import com.bankofcyprus.demo.customer.h2.repository.AccountRepository;
-
-@SpringBootTest(classes = {AccountService.class})
+@ExtendWith(MockitoExtension.class)
 class AccountServiceTests {
-
-	@Autowired
+    @InjectMocks
 	AccountService service;
 	
-    @MockBean
+    @Mock
     AccountRepository repository;
 
     @Test

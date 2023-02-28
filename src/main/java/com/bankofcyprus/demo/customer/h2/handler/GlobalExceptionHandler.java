@@ -1,4 +1,4 @@
-package com.bankofcyprus.demo.customer.h2.controller;
+package com.bankofcyprus.demo.customer.h2.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

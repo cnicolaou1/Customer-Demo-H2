@@ -1,6 +1,20 @@
 package com.bankofcyprus.demo.customer.h2.service;
 
-import static org.mockito.Mockito.when;
+import com.bankofcyprus.demo.customer.h2.api.dto.CreateCustomerRequest;
+import com.bankofcyprus.demo.customer.h2.api.dto.CustomerDto;
+import com.bankofcyprus.demo.customer.h2.api.dto.UpdateCustomerRequest;
+import com.bankofcyprus.demo.customer.h2.exception.CustomerUpdateException;
+import com.bankofcyprus.demo.customer.h2.model.*;
+import com.bankofcyprus.demo.customer.h2.repository.AccountRepository;
+import com.bankofcyprus.demo.customer.h2.repository.CountryRepository;
+import com.bankofcyprus.demo.customer.h2.repository.CustomerAccountRepository;
+import com.bankofcyprus.demo.customer.h2.repository.CustomerRepository;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,48 +22,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ContextConfiguration;
+import static org.mockito.Mockito.when;
 
-import com.bankofcyprus.demo.customer.h2.api.dto.CreateCustomerRequest;
-import com.bankofcyprus.demo.customer.h2.api.dto.CustomerDto;
-import com.bankofcyprus.demo.customer.h2.api.dto.UpdateCustomerRequest;
-import com.bankofcyprus.demo.customer.h2.config.SecurityConfigBean;
-import com.bankofcyprus.demo.customer.h2.exception.CustomerUpdateException;
-import com.bankofcyprus.demo.customer.h2.model.Account;
-import com.bankofcyprus.demo.customer.h2.model.Country;
-import com.bankofcyprus.demo.customer.h2.model.Customer;
-import com.bankofcyprus.demo.customer.h2.model.CustomerAccount;
-import com.bankofcyprus.demo.customer.h2.model.Segmentation;
-import com.bankofcyprus.demo.customer.h2.model.Sex;
-import com.bankofcyprus.demo.customer.h2.repository.AccountRepository;
-import com.bankofcyprus.demo.customer.h2.repository.CountryRepository;
-import com.bankofcyprus.demo.customer.h2.repository.CustomerAccountRepository;
-import com.bankofcyprus.demo.customer.h2.repository.CustomerRepository;
-
-@SpringBootTest(classes = {CustomerService.class})
-@ContextConfiguration(classes = {SecurityConfigBean.class})
+@ExtendWith(MockitoExtension.class)
 class CustomerServiceTests {
-
-	@Autowired
 	CustomerService service;
 	
-    @MockBean
+    @Mock
     CustomerRepository repository;
 
-    @MockBean
+    @Mock
     AccountRepository accountRepository;
 
-    @MockBean
+    @Mock
     CountryRepository countryRepository;
 
-    @MockBean
+    @Mock
     CustomerAccountRepository customerAccountRepository;
 
+    @BeforeEach
+    void initUseCase() {
+        service = new CustomerService("1234", true, repository, accountRepository, countryRepository, customerAccountRepository);
+    }
     @Test
     void findCustomer(){
         String userId = "123456";

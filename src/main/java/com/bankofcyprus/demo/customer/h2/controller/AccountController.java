@@ -2,6 +2,7 @@ package com.bankofcyprus.demo.customer.h2.controller;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,9 +15,9 @@ import com.bankofcyprus.demo.customer.h2.service.AccountService;
 
 @RestController
 @RequestMapping("/v1/accounts")
+@AllArgsConstructor
 public class AccountController
 {
-    @Autowired
     AccountService accountService;
 
     @GetMapping("/{accountNumber}")
