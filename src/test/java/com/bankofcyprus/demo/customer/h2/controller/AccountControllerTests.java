@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bankofcyprus.demo.customer.h2.api.dto.AccountListDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -44,8 +45,8 @@ class AccountControllerTests {
         List<AccountDto> accounts = new ArrayList<AccountDto>();
         accounts.add(this.mockAccountDto(accountNumber));
 
-        String response = "[{\"accountNumber\":\"123456\",\"accountType\":\"TYPE\",\"availableBalance\":0,\"currentBalance\":0}]";
-        when(service.findAllAccounts()).thenReturn(accounts);
+        String response = "{\"accounts\":[{\"accountNumber\":\"123456\",\"accountType\":\"TYPE\",\"availableBalance\":0,\"currentBalance\":0}]}";
+        when(service.findAllAccounts()).thenReturn(AccountListDto.builder().accounts(accounts).build());
         this.mockMvc.perform(get("/v1/accounts/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(equalTo(response)));
     }

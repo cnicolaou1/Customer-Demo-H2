@@ -1,7 +1,6 @@
 package com.bankofcyprus.demo.customer.h2.api.dto;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import com.bankofcyprus.demo.customer.h2.model.Segmentation;
 import com.bankofcyprus.demo.customer.h2.model.Sex;

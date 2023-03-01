@@ -42,7 +42,7 @@ class CustomerServiceTests {
 
     @BeforeEach
     void initUseCase() {
-        service = new CustomerService("1234", true, repository, accountRepository, countryRepository, customerAccountRepository);
+        service = new CustomerService("1234", true, repository, accountRepository, countryRepository);
     }
     @Test
     void findCustomer(){
@@ -63,7 +63,7 @@ class CustomerServiceTests {
         
         when(repository.findAll()).thenReturn(Arrays.asList(customer));
         
-        List<CustomerDto> customers = service.findAllCustomers();
+        List<CustomerDto> customers = service.findAllCustomers().getCustomers();
         
         Assertions.assertNotNull(customers);
         Assertions.assertEquals(1, customers.size());

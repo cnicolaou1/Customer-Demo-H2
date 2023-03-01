@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bankofcyprus.demo.customer.h2.api.dto.CustomerListDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -81,7 +82,8 @@ class CustomerControllerTests {
         List<CustomerDto> customerDtos = new ArrayList<CustomerDto>();
         customerDtos.add(mockCustomerDto());
 
-        String response = "[{\"userId\":\""+USER_ID+"\""+
+        String response = "{" +
+                "\"customers\":[{\"userId\":\""+USER_ID+"\""+
                 ",\"name\":\""+NAME+"\""+
                 ",\"sex\":\""+SEX.name()+"\""+
                 ",\"email\":\""+EMAIL+"\""+
@@ -90,9 +92,10 @@ class CustomerControllerTests {
                 ",\"birthDate\":\""+BIRTH_DATE+"\""+
                 ",\"segmentation\":\""+SEGMENTATION.name()+"\""+
                 ",\"countryCode\":\""+COUNTRY_CODE+"\""+
-                "}]";
+                "}]" +
+                "}";
 
-        when(service.findAllCustomers()).thenReturn(customerDtos);
+        when(service.findAllCustomers()).thenReturn(CustomerListDto.builder().customers(customerDtos).build());
         mockMvc.perform(get("/v1/customers/")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(equalTo(response)));
     }
@@ -108,7 +111,7 @@ class CustomerControllerTests {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(TestHelper.asJsonString(customerRequest)))
                         .andDo(print())
-                        .andExpect(status().isOk())
+                        .andExpect(status().isCreated())
                             .andExpect(content().string(equalTo(TestHelper.asJsonString(customerDto))));
 
         customerRequest.setLastName(null);

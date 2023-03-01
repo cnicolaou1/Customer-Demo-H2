@@ -1,7 +1,14 @@
 package com.bankofcyprus.demo.customer.h2.service;
 
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.bankofcyprus.demo.customer.h2.api.dto.CreateCustomerRequest;
 import com.bankofcyprus.demo.customer.h2.api.dto.CustomerDto;
+import com.bankofcyprus.demo.customer.h2.api.dto.CustomerListDto;
 import com.bankofcyprus.demo.customer.h2.api.dto.UpdateCustomerRequest;
 import com.bankofcyprus.demo.customer.h2.exception.ConnectAccountException;
 import com.bankofcyprus.demo.customer.h2.exception.CustomerCreateException;
@@ -11,16 +18,9 @@ import com.bankofcyprus.demo.customer.h2.model.Customer;
 import com.bankofcyprus.demo.customer.h2.model.CustomerAccount;
 import com.bankofcyprus.demo.customer.h2.repository.AccountRepository;
 import com.bankofcyprus.demo.customer.h2.repository.CountryRepository;
-import com.bankofcyprus.demo.customer.h2.repository.CustomerAccountRepository;
 import com.bankofcyprus.demo.customer.h2.repository.CustomerRepository;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -35,19 +35,17 @@ public class CustomerService {
 
     private CountryRepository countryRepository;
 
-    private CustomerAccountRepository customerAccountRepository;
-
     public CustomerDto findCustomer(String userId){
         Customer customer = customerRepository.findByUserId(userId);
 
         return toCustomerDto(customer);
     }
 
-    public List<CustomerDto> findAllCustomers(){
+    public CustomerListDto findAllCustomers(){
         List<Customer> customers = customerRepository.findAll();
 
-        return customers.stream()
-                .map(customer -> toCustomerDto(customer)).collect(Collectors.toList());
+        return CustomerListDto.builder().customers(customers.stream()
+                .map(customer -> toCustomerDto(customer)).collect(Collectors.toList())).build();
     }
 
     public CustomerDto createCustomer(CreateCustomerRequest request){

@@ -44,7 +44,7 @@ class AccountServiceTests {
         
         when(repository.findAll()).thenReturn(Arrays.asList(account));
         
-        List<AccountDto> accounts = service.findAllAccounts();
+        List<AccountDto> accounts = service.findAllAccounts().getAccounts();
         
         Assertions.assertNotNull(accounts);
         Assertions.assertEquals(1, accounts.size());
