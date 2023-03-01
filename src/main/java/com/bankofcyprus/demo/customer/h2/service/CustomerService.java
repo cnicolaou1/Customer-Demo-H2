@@ -37,15 +37,6 @@ public class CustomerService {
 
     private CustomerAccountRepository customerAccountRepository;
 
-//    public CustomerService(String authCode, boolean authorizationCodeRequired, CustomerRepository customerRepository, AccountRepository accountRepository, CountryRepository countryRepository, CustomerAccountRepository customerAccountRepository) {
-//        this.authCode = authCode;
-//        this.authorizationCodeRequired = authorizationCodeRequired;
-//        this.customerRepository = customerRepository;
-//        this.accountRepository = accountRepository;
-//        this.countryRepository = countryRepository;
-//        this.customerAccountRepository = customerAccountRepository;
-//    }
-
     public CustomerDto findCustomer(String userId){
         Customer customer = customerRepository.findByUserId(userId);
 

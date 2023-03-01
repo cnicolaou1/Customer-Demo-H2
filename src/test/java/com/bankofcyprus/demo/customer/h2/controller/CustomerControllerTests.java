@@ -66,7 +66,7 @@ class CustomerControllerTests {
                             ",\"birthDate\":\""+BIRTH_DATE+"\""+
                             ",\"segmentation\":\""+SEGMENTATION.name()+"\""+
                             ",\"countryCode\":\""+COUNTRY_CODE+"\""+
-                            ",\"customerAccounts\":null}";
+                            "}";
 
 //        {"userId":"123456","name":"Test Test","sex":"FEMALE","email":"test@test.com","mobileNumber":"123456","idNumber":"123456","birthDate":"2000-01-01","segmentation":"RETAIL","countryCode":"CY","customerAccounts":null}
 
@@ -90,7 +90,7 @@ class CustomerControllerTests {
                 ",\"birthDate\":\""+BIRTH_DATE+"\""+
                 ",\"segmentation\":\""+SEGMENTATION.name()+"\""+
                 ",\"countryCode\":\""+COUNTRY_CODE+"\""+
-                ",\"customerAccounts\":null}]";
+                "}]";
 
         when(service.findAllCustomers()).thenReturn(customerDtos);
         mockMvc.perform(get("/v1/customers/")).andDo(print()).andExpect(status().isOk())

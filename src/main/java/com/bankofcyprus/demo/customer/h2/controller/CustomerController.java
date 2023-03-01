@@ -6,7 +6,6 @@ import com.bankofcyprus.demo.customer.h2.api.dto.CustomerDto;
 import com.bankofcyprus.demo.customer.h2.api.dto.UpdateCustomerRequest;
 import com.bankofcyprus.demo.customer.h2.service.CustomerService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +45,4 @@ public class CustomerController
 
         return ResponseEntity.ok().build();
     }
-
-
 }
